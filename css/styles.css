@@ -188,3 +188,69 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.logIn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h3 {
+  margin: 0;
+  font-size: 14px;
+  width: 100%; 
+  text-align: left;
+}
+
+.Usuario, .contraseña {
+  width: 100%; 
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background-color: #c4bebc;
+  margin-bottom: 10px;
+}
+
+.Ingresar {
+  margin-top: 20px;
+  width: 100%; 
+  text-align: center;
+}
+
+input[type="submit"] {
+  width: 90px;
+  height: 35px;
+  border: 1px solid;
+  background-color: #c4bebc;
+  font-size: 15px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+input[type="submit"]:hover {
+  border-color: blue;
+}
+
