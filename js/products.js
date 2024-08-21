@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //Función para recorrer el array y generar el html
     function mostrarData(array){
         for (let elemento of array){
-            divAutos.innerHTML += `<div> <img src="${elemento.image}"><p><strong>Nombre:</strong> ${elemento.name}</p>
+            divAutos.innerHTML += `<div class="articulo"> <img src="${elemento.image}"><div><p><strong>Nombre:</strong> ${elemento.name}</p>
         <p><strong>Descripción:</strong> ${elemento.description}</p>
         <p><strong>Precio:</strong> ${elemento.cost}</p>
         <p><strong>Cantidad vendida:</strong> ${elemento.soldCount}</p></div>`
