@@ -277,62 +277,6 @@ input[type="submit"]:hover {
 } 
 
 
-@media screen and (max-width: 568px) {
-  #autos > div {
-    flex-direction: column; 
-    align-items: left;    
-    text-align: left;     
-  }
-
-  #autos > div > div {
-    margin-left: 0; /* Remueve el margen izquierdo */
-    margin-top: 1.25rem; /* margen superior para separar de la imagen */
-    align-self: flex-start; 
-  }
-}
-
-@media screen and (min-width: 768px){
-  #autos > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;   
-    text-align: left;   
-  }
-  #autos > div > div {
-    margin-left: 10px;      
-    margin-top: 0;           
-    display: flex;           
-    flex-direction: column;  
-    justify-content: center; 
-  }
-
-  #autos img {
-    max-height: 10rem; 
-  }
-
-
-}
-@media screen and (min-width: 1024) and (max-width:1366px) {
-  #autos>div{
-    display: flex;
-    margin: 6rem 6rem 6rem 6rem;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-  }
-  #autos img{
-    max-height: 150px;
-  }
-  #autos>div>div{
-    margin: 0 0 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    
-  }
-}
-
-
 
 
 
