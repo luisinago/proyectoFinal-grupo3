@@ -256,7 +256,7 @@ input[type="submit"]:hover {
 
 #seccionAutos{
   margin: auto;
-  width: 70%;
+  width: 100%;
 }
 #seccionAutos h1{
   text-align: center;
@@ -274,4 +274,10 @@ input[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   align-self: center;
-}
+} 
+
+
+
+
+
+
