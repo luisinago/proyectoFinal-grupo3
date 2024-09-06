@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", ()=>{
-    let divAutos = document.getElementById("autos");
-    let jsonAutos = "https://japceibal.github.io/emercado-api/cats_products/101.json"
+    let categoriaId= localStorage.getItem("catID");
+    let divAgrega = document.getElementById("categoria");
+    let jsonProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`
 
     //Función para recorrer el array y generar el html
     function mostrarData(array){
         for (let elemento of array){
-            divAutos.innerHTML += `<div class="col-12 col-md-12 mb-4">
+            divAgrega.innerHTML += `<div class="col-12 col-md-12 mb-4">
             <div class="d-flex flex-column flex-md-row align-items-center">
                 <img src="${elemento.image}" class="img-fluid me-md-3 mb-3 mb-md-0 " alt="${elemento.name}" style="width: 150px; height: auto;">
                 <div>
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     //Fetch para categoría autos
-    fetch(jsonAutos)
+    fetch(jsonProductos)
     .then(response => response.json())
     .then(data => {
 
