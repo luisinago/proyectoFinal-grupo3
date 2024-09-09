@@ -1,4 +1,22 @@
-  document.addEventListener("DOMContentLoaded", () => {
+
+
+// Función para almacenar el ID del producto y redirigir a la página de detalles
+
+
+function verDetallesProducto(productoID, categoriaID) {
+    console.log("ID del producto:", productoID);
+    console.log("ID de la categoría:", categoriaID);
+
+    localStorage.setItem("productoID", productoID);
+    localStorage.setItem("categoriaID", categoriaID);
+
+    console.log("LocalStorage productoID:", localStorage.getItem("productoID"));
+    console.log("LocalStorage categoriaID:", localStorage.getItem("categoriaID"));
+
+    window.location.href = 'product-info.html';  
+}
+ 
+ document.addEventListener("DOMContentLoaded", () => {
     var categoriaId = localStorage.getItem("catID");
     var divAgrega = document.getElementById("categoria");
     var jsonProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
@@ -7,6 +25,7 @@
     //Función para recorrer el array y generar el html
     function mostrarData(array) {
         // Limpiamos el html cada vez que se llama a la función para que cuando se filtre no aparezcan todos
+
         divAgrega.innerHTML = "";
         for (let elemento of array) {
             divAgrega.innerHTML += `<div class="col-12 col-md-12 mb-4">
@@ -17,11 +36,64 @@
                     <p class="mb-1"><strong>Descripción:</strong> ${elemento.description}</p>
                     <p class="mb-1"><strong>Precio:</strong> ${elemento.cost}</p>
                     <p class="mb-1"><strong>Cantidad vendida:</strong> ${elemento.soldCount}</p>
+                  <button class="btn btn-primary" onclick="verDetallesProducto(${elemento.id}, ${categoriaId})">Ver detalles</button> 
                 </div>
             </div>
         </div>`;
         }
     }
+    // Se agregó un botón a cada producto para ver los detalles. Nos manda a product-info.html
+
+document.addEventListener("DOMContentLoaded", () => {
+    var categoriaId = localStorage.getItem("catID");
+    var divAgrega = document.getElementById("categoria");
+    var jsonProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
+
+    
+    function mostrarData(array) {
+        divAgrega.innerHTML = "";
+        for (let elemento of array) {
+            divAgrega.innerHTML += `
+            <div class="producto">
+                <h2 class="titulo-producto">${elemento.name}</h2>
+                <p class="categoria-producto">Categoría: ${elemento.category}</p>
+                <div class="imagenes-producto">
+                    <img src="${elemento.image}" alt="Imagen de producto" class="imagen-principal">
+                    <div class="imagenes-secundarias">
+                       
+                        <img src="${elemento.image}" alt="Detalle 1" class="imagen-detalle">
+                        <img src="${elemento.image}" alt="Detalle 2" class="imagen-detalle">
+                        <img src="${elemento.image}" alt="Detalle 3" class="imagen-detalle">
+                    </div>
+                </div>
+                <p class="descripcion-producto">${elemento.description}</p>
+                <p class="unidades-vendidas">Unidades vendidas: ${elemento.soldCount}</p>
+                <button class="btn btn-primary" onclick="verDetallesProducto(${elemento.id}, ${categoriaId})">Ver detalles</button>
+            </div>`;
+        }
+    }
+
+    // Fetch para obtener los productos del JSON
+    fetch(jsonProductos)
+        .then(response => response.json())
+        .then(data => {
+            mostrarData(data.products); 
+        })
+        .catch(error => console.error('Error al cargar los productos:', error));
+
+    // Función para almacenar el ID del producto y redirigir a la página de detalles
+    function verDetallesProducto(productoID, categoriaID) {
+        localStorage.setItem("productoID", productoID);
+        localStorage.setItem("categoriaID", categoriaID);
+        window.location.href = 'product-info.html';
+    }
+});
+
+
+  
+
+
+
 
     // Fetch
     fetch(jsonProductos)

@@ -334,3 +334,28 @@ input[type="submit"]:hover {
     padding: 0.5rem; 
   }
 }
+
+/* estilo para product-info.html */
+
+#detallesProductos {
+
+  background-color: #eaa336;
+  
+  }
+  
+  #detallesProductos h1 {
+    text-align: center;
+  }
+  
+  #detallesProductos .imagen-producto img {
+    width: 50%; 
+    height: auto; 
+    max-width: 400px; 
+    margin-right: 20px; 
+  }
+  
+  #detallesProductos .unidades-vendidas {
+    text-align: right; 
+    font-weight: bold; /* bold va a añadir un estilo de negrita */
+    margin-top: 10px; 
+  }
