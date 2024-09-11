@@ -359,6 +359,23 @@ input[type="submit"]:hover {
     font-weight: bold; /* bold va a añadir un estilo de negrita */
     margin-top: 10px; 
   }
+
+/* Estilos para las imágenes secundarias */
+
+ #detallesProductos .imagenes-secundarias {
+  position: absolute;
+  top: 150px; 
+  right: 200px; 
+  width: 120px; /* Reducimos un poco el ancho de las imágenes secundarias */
+}
+
+#detallesProductos .imagenes-secundarias img {
+  width: 100%; 
+  height: auto;
+  margin-bottom: 10px; 
+}
+
+=======
   /* Asegúrate de que el campo de búsqueda tenga un margen superior adecuado */
 #searchInput {
   margin-top: 20px; /* Ajusta el valor según tus necesidades */
