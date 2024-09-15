@@ -375,8 +375,7 @@ input[type="submit"]:hover {
   margin-bottom: 10px; 
 }
 
-=======
-  /* Asegúrate de que el campo de búsqueda tenga un margen superior adecuado */
+
 #searchInput {
-  margin-top: 20px; /* Ajusta el valor según tus necesidades */
+  margin-top: 20px; 
 }
