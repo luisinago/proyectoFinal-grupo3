@@ -46,6 +46,9 @@ fetchProductosInfo();  */
 let productoID = localStorage.getItem("productoID");
 let categoriaID = localStorage.getItem("categoriaID");
 
+/*let productosURL = {
+  `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
+}*/
 // Categorías con las URL de los JSON
 let categoriasURL = {
     101: "https://japceibal.github.io/emercado-api/cats_products/101.json",  // Autos
@@ -123,4 +126,66 @@ let fetchImagenesSecundarias = async (productoID) => {
 // Llamamos 
 fetchProductosInfo();
 
+  
+const JsonComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoID}.json`;
+let fetchOpiniones = async (productoID) => {
+      let response =  await fetch(JsonComentarios);
+      let comentarioData = await response.json();
+      let containerComentarios = document.getElementById('seccionComentarios');
+      comentarioData.forEach(comentarioData => {
+        let comentarioContenido = `<br>
+        <div class="comentario">
+        <h5 class="usuario"><strong>${comentarioData.user}</strong></h5>
+        <div class="comentario">${comentarioData.description}</div>
+        <span> ${generarEstrellas(comentarioData.score)}</span>
+        <div class="fechaComentario">${comentarioData.dateTime}</div>
+        <br>`;
+        containerComentarios.innerHTML += comentarioContenido;
+      })
+    };
 
+    fetchOpiniones(productoID);
+
+    function generarEstrellas(puntaje) {
+      let estrellas = '';
+      let rating = puntaje;
+  
+  
+      for (let i = 1; i <= 5; i++) {
+          if (i <= rating) {
+              estrellas += "<img src='./img/llena.png' width=13>";
+          } else {
+              estrellas += "<img src='./img/vacia.png' width=13>";
+          }
+      }
+  
+  
+      return estrellas;
+  }
+      
+    
+
+
+let fetchProductosRel = async () => {
+      let response =  await fetch(productosImagesURLs[productoID]);
+      let productoData = await response.json();
+      let relatedProductContainer = document.getElementById('productosRelacionados');
+          // Actualizamos el contenido en el HTML
+          productoData.relatedProducts.forEach(relatedProduct => {
+let contenidoRelP= `
+<div class="card border-dark mb-3" style="width: 12rem;" onclick="irAlProducto(${relatedProduct.id})">
+<img class="card-img-top" src="${relatedProduct.image}" alt="${relatedProduct.name}">
+<div class="card-body">
+    <h5 class="card-title">${relatedProduct.name}</h5>
+</div>
+</div>`;
+relatedProductContainer.innerHTML += contenidoRelP; 
+          
+         } )};
+
+fetchProductosRel();
+
+function irAlProducto(idproducto){
+ localStorage.setItem('productoID', idproducto);
+ window.location.href= 'product-info.html';
+}
