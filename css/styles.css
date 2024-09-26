@@ -375,8 +375,28 @@ input[type="submit"]:hover {
   margin-bottom: 10px; 
 }
 
-=======
+
   /* Asegúrate de que el campo de búsqueda tenga un margen superior adecuado */
 #searchInput {
   margin-top: 20px; /* Ajusta el valor según tus necesidades */
+}
+#productosRelacionados{
+  display: flex;
+  flex-wrap: wrap; /* Para que las tarjetas se envuelvan en una nueva línea si no hay suficiente espacio */
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+h5.usuario{
+  font-size: small;
+  font-family: Helvetica;
+
+}
+div.fechaComentario{
+  font-size: small;
+  font-family: Helvetica;
+}
+div.comentario{
+  font-size: small;
+  font-family: Helvetica;
 }
