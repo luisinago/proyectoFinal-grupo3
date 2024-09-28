@@ -153,9 +153,9 @@ let fetchOpiniones = async (productoID) => {
   
       for (let i = 1; i <= 5; i++) {
           if (i <= rating) {
-              estrellas += "<img src='./img/llena.png' width=13>";
+              estrellas += `<span class="fa fa-star checked"></span>`;
           } else {
-              estrellas += "<img src='./img/vacia.png' width=13>";
+              estrellas += `<span class="fa fa-star"></span>`;
           }
       }
   
@@ -163,6 +163,23 @@ let fetchOpiniones = async (productoID) => {
       return estrellas;
   }
       
+
+//Espacio para que el usuario puntúe e ingrese comentario
+const stars = document.querySelectorAll('#star-rating span');
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        stars.forEach((s, i) => {
+            if (i <= index) {
+                s.classList += 'fa fa-star checked';
+            } else {
+                s.classList = 'fa fa-star';
+            }
+        });
+    });
+});
+
+//Caja comentario
+
     
 
 
