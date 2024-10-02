@@ -206,3 +206,49 @@ function irAlProducto(idproducto){
  localStorage.setItem('productoID', idproducto);
  window.location.href= 'product-info.html';
 }
+
+// Función para generar estrellas
+function generarEstrellas(calificacion) {
+    let estrellasHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        estrellasHTML += `<span class="fa fa-star ${i <= calificacion ? 'checked' : ''}"></span>`;
+    }
+    return estrellasHTML;
+}
+
+// Evento para el botón "Enviar"
+document.querySelector('.btn-primary').addEventListener('click', function() {
+    const estrellas = document.querySelectorAll('#star-rating .fa-star');
+    let calificacion = 0;
+
+    estrellas.forEach((estrella, index) => {
+        if (estrella.classList.contains('checked')) {
+            calificacion = index + 1;
+        }
+    });
+
+    const comentario = document.getElementById('cajaComentario').value;
+
+    if (calificacion > 0 && comentario) {
+        // Agregar comentario a la lista
+        const listaComentarios = document.getElementById('listaComentarios');
+        const nuevoComentario = document.createElement('div');
+        nuevoComentario.innerHTML = `${generarEstrellas(calificacion)}<p>${comentario}</p>`;
+        listaComentarios.appendChild(nuevoComentario);
+
+        // Limpiar campos
+        document.getElementById('cajaComentario').value = '';
+        estrellas.forEach(estrella => estrella.classList.remove('checked'));
+    } else {
+        alert("Por favor, selecciona una calificación y escribe un comentario.");
+    }
+});
+
+// Evento para seleccionar estrellas
+document.querySelectorAll('#star-rating .fa-star').forEach((estrella, index) => {
+    estrella.addEventListener('click', function() {
+        document.querySelectorAll('#star-rating .fa-star').forEach((s, i) => {
+            s.classList.toggle('checked', i <= index);
+        });
+    });
+});

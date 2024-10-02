@@ -409,3 +409,7 @@ div.comentario{
 h3{
   font-size: medium;
 }
+
+.checked {
+  color: gold; /* O el color que prefieras */
+}
