@@ -146,7 +146,7 @@ let fetchOpiniones = async (productoID) => {
 
     fetchOpiniones(productoID);
 
-    function generarEstrellas(puntaje) {
+    /*function generarEstrellas(puntaje) {
       let estrellas = '';
       let rating = puntaje;
   
@@ -162,7 +162,7 @@ let fetchOpiniones = async (productoID) => {
   
       return estrellas;
   }
-      
+      */
 
 //Espacio para que el usuario puntúe e ingrese comentario
 const stars = document.querySelectorAll('#star-rating span');
@@ -228,12 +228,29 @@ document.querySelector('.btn-primary').addEventListener('click', function() {
     });
 
     const comentario = document.getElementById('cajaComentario').value;
+    const fecha = new Date();
+    const año = fecha.getFullYear();
+    const mes = ("0" + (fecha.getMonth() + 1)).slice(-2); // Los meses en JavaScript van de 0 a 11
+    const día = ("0" + fecha.getDate()).slice(-2);
+    const horas = ("0" + fecha.getHours()).slice(-2);
+    const minutos = ("0" + fecha.getMinutes()).slice(-2);
+    const segundos = ("0" + fecha.getSeconds()).slice(-2);
+    
+    const fechaf = `${año}-${mes}-${día} ${horas}:${minutos}:${segundos}`;
+    
+
 
     if (calificacion > 0 && comentario) {
         // Agregar comentario a la lista
-        const listaComentarios = document.getElementById('listaComentarios');
+        const listaComentarios = document.getElementById('seccionComentarios');
         const nuevoComentario = document.createElement('div');
-        nuevoComentario.innerHTML = `${generarEstrellas(calificacion)}<p>${comentario}</p>`;
+        nuevoComentario.innerHTML = `<br>
+        <div class="comentario">
+        <h5 class="usuario"><strong>${localStorage.getItem("username")}</strong></h5>
+        <div class="comentario">${comentario}</div>
+        <span> ${generarEstrellas(calificacion)}</span>
+        <div class="fechaComentario">${fechaf}</div>
+        <br>`;
         listaComentarios.appendChild(nuevoComentario);
 
         // Limpiar campos
