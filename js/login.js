@@ -73,5 +73,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
     window.location.href = "index.html";
 });
 
-if (localStorage.getItem("usuario") && localStorage.getItem("contraseña")){ document.getElementById("user").innerHTML = "Cliente: " + username;
+if (localStorage.getItem("usuario") && localStorage.getItem("contraseña")){
+  const username = localStorage.getItem("usuario");
+  document.getElementById("user").innerHTML = "Cliente: " + username;
 }
