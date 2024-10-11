@@ -54,11 +54,50 @@
     </div>
   </nav>
   <main>
+    
+
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
+      <form id="formulario-perfil" class="p-4">
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre*</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+  
+          <div class="mb-3">
+              <label for="segundo-nombre" class="form-label">Segundo nombre</label>
+              <input type="text" class="form-control" id="segundo-nombre" name="segundo-nombre">
+          </div>
+  
+          <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido*</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+          </div>
+  
+          <div class="mb-3">
+              <label for="segundo-apellido" class="form-label">Segundo apellido</label>
+              <input type="text" class="form-control" id="segundo-apellido" name="segundo-apellido">
+          </div>
+  
+          <div class="mb-3">
+              <label for="email" class="form-label">E-Mail*</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+  
+          <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono de contacto</label>
+              <input type="tel" class="form-control" id="telefono" name="telefono">
+          </div>
+  
+          <div class="mb-3 text-center">
+              <label for="foto" class="form-label">Foto de perfil</label><br>
+              <button type="button" class="btn btn-success" id="foto">Cargar foto</button>
+          </div>
+  
+          <button type="submit" class="btn btn-success">Guardar cambios</button>
+      </form>
+  </div>
+
+
   </main>
   <footer class="text-muted">
     <div class="container">
