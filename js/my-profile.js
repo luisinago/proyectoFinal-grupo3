@@ -1,6 +1,3 @@
-/*if (localStorage.getItem("usuario") && localStorage.getItem("contraseña")) {
-    document.getElementById("user").innerHTML = "Cliente: " + username;
-}*/
 document.addEventListener('DOMContentLoaded', () => {
 
     const usuario = localStorage.getItem('username');
@@ -52,6 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             
                         }, false)
+
+                        //Aplicar tema
+                        const switchBtn = document.getElementById("switch");
+
+                        switchBtn.addEventListener("change", () =>{
+                            const activaOscuro = switchBtn.checked;
+                            
+                            // Toggle 'dark-theme' en el body y el formulario
+                            document.body.classList.toggle('dark-theme', activaOscuro);
+                            form.classList.toggle('dark-theme', activaOscuro);
+                            
+                        })
 
                     })
                 
