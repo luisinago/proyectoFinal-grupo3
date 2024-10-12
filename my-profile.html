@@ -57,10 +57,13 @@
     
 
     <div class="container">
-      <form id="formulario-perfil" class="p-4">
+      <form id="formulario-perfil" class="p-4 needs-validation" novalidate>
           <div class="mb-3">
               <label for="nombre" class="form-label">Nombre*</label>
               <input type="text" class="form-control" id="nombre" name="nombre" required>
+              <div class="invalid-feedback">
+                Proporciona un nombre válido.
+              </div>
           </div>
   
           <div class="mb-3">
@@ -71,6 +74,9 @@
           <div class="mb-3">
               <label for="apellido" class="form-label">Apellido*</label>
               <input type="text" class="form-control" id="apellido" name="apellido" required>
+              <div class="invalid-feedback">
+                Proporciona un apellido válido.
+              </div>
           </div>
   
           <div class="mb-3">
