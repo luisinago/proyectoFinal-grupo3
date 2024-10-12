@@ -418,17 +418,77 @@ h3{
 
 #formulario-perfil {
   max-width: 600px;
-  margin: 50px auto;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+  margin: 2em auto 10em;
+  padding: 2em 0;
 }
 
 #formulario-perfil button {
-  width: 150px;
+  width: auto;
 }
 
 #foto {
   width: 150px;
-  margin-top: 10px;
+  margin-top: 0.3em;
+}
+
+/* Estilos toggler*/
+
+#divToggler{
+margin: 5em 0 1em;
+display: flex;
+gap: 0.5rem;
+justify-content: center;
+}
+
+.bi-brightness-low-fill{
+  font-size: 1.5rem;
+  color: #eaa336;
+}
+
+.bi-bi-moon-fill{
+  font-size: 1.5rem;
+  color: #122750;
+}
+
+.contenedor-toggler{
+  width: 5rem;
+  height: 2rem;
+  border-radius: 3rem;
+  background-color: #e7e7e7;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.toggler{
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #eaa336;
+  transition: transform 0.5s;
+}
+
+#switch:checked + .contenedor-toggler .toggler{
+  transform: translateX(3rem);
+  background-color: #122750;
+}
+
+
+/* Estilos modo oscuro (claro es el por default)*/
+.dark-theme {
+  background-color: #252525;
+  color: #eeeeee;
+}
+
+#formulario-perfil.dark-theme {
+  background-color: #252525;
+}
+
+#formulario-perfil.dark-theme .secundario {
+  border-color: #eeeeee;
+  color: #eeeeee;
+}
+
+#formulario-perfil.dark-theme .secundario:hover{
+  background-color: #707070;
 }
