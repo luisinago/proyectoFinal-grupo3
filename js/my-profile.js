@@ -62,14 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                         })
 
-                    })
-                
+    // Cargar foto de perfil al inicio
+const storedPic = localStorage.getItem('profilePic');
+if (storedPic) {
+    profilePic.src = storedPic; // Mostrar foto almacenada
+}
 
-               
-            
+// Cambiar la foto de perfil al hacer clic en el botón
+document.getElementById('uploadBtn').onclick = function() {
+    document.getElementById('fileInput').click(); // Simular clic en el input de archivo
+};
 
-         
-            
+// Leer el archivo de imagen y actualizar la foto de perfil
+document.getElementById('fileInput').onchange = function() {
+    const file = this.files[0];
 
-
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            profilePic.src = event.target.result; // Cambiar la imagen mostrada
+            localStorage.setItem('profilePic', event.target.result); // Almacenar en localStorage
+        };
+        reader.readAsDataURL(file); // Leer el archivo como una URL de datos
+    } else {
+        alert('Por favor, selecciona una imagen.');
+    }
+};
+})
 
