@@ -158,7 +158,7 @@ function generarEstrellas(calificacion) {
 }
 
 // Evento para el botón "Enviar"
-document.querySelector('.btn-primary').addEventListener('click', function() {
+document.getElementById('botonEnviarCom').addEventListener('click', function() {
     const estrellas = document.querySelectorAll('#star-rating .fa-star');
     let calificacion = 0;
 
@@ -200,6 +200,7 @@ document.querySelector('.btn-primary').addEventListener('click', function() {
     } else {
         alert("Por favor, selecciona una calificación y escribe un comentario.");
     }
+
 });
 
 // Evento para seleccionar estrellas
@@ -210,3 +211,40 @@ document.querySelectorAll('#star-rating .fa-star').forEach((estrella, index) => 
         });
     });
 });
+
+let botonComprar = document.getElementById('botonComprar');
+
+botonComprar.addEventListener('click', ()=>{
+    agregarAlCarrito();
+})
+
+let carrito = JSON.parse(localStorage.getItem(`carritoComprar`)) || [];
+
+function agregarAlCarrito (){
+
+    let producto= localStorage.getItem('productoID')
+
+    fetch(`https://japceibal.github.io/emercado-api/products/${producto}.json`)
+    .then(response => response.json())
+    .then(data => {
+        let {name, cost, currency, images} = data;
+        if(currency == "USD"){
+            cost= cost * 40;
+            currency= "UYU"
+        }
+        let prodCarrito = {
+            nombre: name,
+            costo: cost,
+            moneda: currency,
+            imagen: images[0]
+
+        }; 
+            carrito.push(prodCarrito); // los pushea al arreglo de los datos
+            localStorage.setItem('carritoComprar', JSON.stringify(carrito)); //los convierte en un objeto json para guardar en local storage
+            
+    })
+    .catch(error => console.error('Error al cargar los productos:', error));
+
+
+    window.location.href='cart.html';
+}

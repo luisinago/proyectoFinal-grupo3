@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("logout").addEventListener("click", function() {
       localStorage.removeItem("username"); //Elimina el username del localStorage
+      localStorage.removeItem('carritoComprar');
       window.location.href = "login.html"; //Redirigir al login
     });
 
