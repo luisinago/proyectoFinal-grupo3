@@ -212,39 +212,44 @@ document.querySelectorAll('#star-rating .fa-star').forEach((estrella, index) => 
     });
 });
 
-let botonComprar = document.getElementById('botonComprar');
+let botonComprar = document.getElementById('botonComprar'); //evento de presionar el boton
 
 botonComprar.addEventListener('click', ()=>{
-    agregarAlCarrito();
+    agregarAlCarrito(); //ejecuto agregar al carrito
 })
 
-let carrito = JSON.parse(localStorage.getItem(`carritoComprar`)) || [];
+let producto= localStorage.getItem('productoID')
+let usuarioAc = localStorage.getItem('username');
+let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
 
 function agregarAlCarrito (){
-
-    let producto= localStorage.getItem('productoID')
-
-    fetch(`https://japceibal.github.io/emercado-api/products/${producto}.json`)
+    fetch(`https://japceibal.github.io/emercado-api/products/${producto}.json`) //trae la info del producto
     .then(response => response.json())
     .then(data => {
-        let {name, cost, currency, images} = data;
+        let {name, cost, currency, images} = data; //desestructuro
         if(currency == "USD"){
             cost= cost * 40;
             currency= "UYU"
-        }
+        }//si la moneda es en dolares, la convierto a pesos
         let prodCarrito = {
             nombre: name,
             costo: cost,
+            cantidad: 1,
             moneda: currency,
             imagen: images[0]
 
-        }; 
-            carrito.push(prodCarrito); // los pushea al arreglo de los datos
-            localStorage.setItem('carritoComprar', JSON.stringify(carrito)); //los convierte en un objeto json para guardar en local storage
+        }; //creo el objeto del prod para el carrito
+        let prodExiste = carrito.find(item => item.nombre === name); //me fijo si en el carrito ya esta ese mismo prod
+        if(prodExiste){
+            prodExiste.cantidad += 1; //si esta, no agrego el objeto de nuevo, solo le sumo uno a la cantidad
+        }else{
+            carrito.push(prodCarrito); // si no esta, agrego el objeto nuevo
+         } 
+            localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito)); //los convierte en un objeto json para guardar en local storage y le paso el user para que cada carrito sea individual
             
     })
     .catch(error => console.error('Error al cargar los productos:', error));
 
 
-    window.location.href='cart.html';
+    window.location.href='cart.html'; //me manda al carrito al presionar comprar
 }
