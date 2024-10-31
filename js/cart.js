@@ -3,7 +3,8 @@ if (localStorage.getItem("usuario") && localStorage.getItem("contraseña")){ doc
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
-let carrito = JSON.parse(localStorage.getItem('carritoComprar'));
+let usuarioAc= localStorage.getItem('username');
+let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`));
 
 
 let containerCarro= document.getElementById('containerCarro');
@@ -25,7 +26,7 @@ if(!carrito){
           <td><p>Precio: <strong>${prod.costo}</strong></p></td>
           <td><p>Moneda: ${prod.moneda}</p></td>
           <td><label for="cantidad">Cantidad:</label>
-          <input id="cantidad" type="text" value="1"></td>
+          <input id="cantidad" type="text" value="${prod.cantidad}"></td>
           <td><p>Subtotal: $ ${prod.costo} </p></td>
         </tr>
         </div>
