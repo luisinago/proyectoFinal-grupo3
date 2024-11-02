@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   let usuarioAc = localStorage.getItem('username');
   let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
-  
   // Actualiza el contador en el badge del carrito
   document.getElementById('cartCount').innerText = carrito.length;
 
   let containerCarro = document.getElementById('containerCarro');
 
-  if (!carrito.length) {
+  if (carrito.length === 0) {
       containerCarro.innerHTML = '<div class="alert alert-dark" role="alert">No hay productos en el carrito!</div>';
   } else {
       carrito.forEach((prod, index) => {
@@ -23,11 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
                           <p>Moneda: ${prod.moneda}</p>
                           <div class="d-flex align-items-center">
                               <label for="cantidad-${index}" style="margin-right: 5px;">Cantidad:</label>
-                              <input id="cantidad-${index}" type="number" value="1" min="1" style="background-color: lightgray; width: 30px;">
+                              <input id="cantidad-${index}" type="text" value="1" style="background-color: lightgray; width: 30px;">
                           </div>
-                          <p><strong id="subtotal-${index}">Total: $${prod.costo}</strong></p>
+                          <p><strong id="subtotal-${index}">Subtotal: $${prod.costo}</strong></p>
                       </div>
                   </div>
+      
               </div>
           `;
           containerCarro.innerHTML += productoHTML;
@@ -39,8 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById(`cantidad-${index}`).addEventListener('input', (e) => {
               let cantidad = parseInt(e.target.value) || 1;
               let subtotal = prod.costo * cantidad;
-              document.getElementById(`subtotal-${index}`).innerText = `Total: $${subtotal}`;
-            });    
+              document.getElementById(`subtotal-${index}`).innerText = `Subtotal: $${subtotal}`;
+            });   
+            
+            
       });
+
+
   }
 });
