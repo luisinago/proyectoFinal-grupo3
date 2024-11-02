@@ -32,12 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
           containerCarro.innerHTML += productoHTML;
 
+        })
+
           // Actualizar subtotal en tiempo real
+          carrito.forEach((prod, index) => {
           document.getElementById(`cantidad-${index}`).addEventListener('input', (e) => {
               let cantidad = parseInt(e.target.value) || 1;
               let subtotal = prod.costo * cantidad;
               document.getElementById(`subtotal-${index}`).innerText = `Total: $${subtotal}`;
-          });
+            });    
       });
   }
 });
