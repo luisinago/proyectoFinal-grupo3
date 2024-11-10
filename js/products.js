@@ -43,7 +43,7 @@ function verDetallesProducto(productoID, categoriaID) {
         }
     }
     // Se agregó un botón a cada producto para ver los detalles. Nos manda a product-info.html
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
     var categoriaId = localStorage.getItem("catID");
     var divAgrega = document.getElementById("categoria");
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>`;
         }
     }
-
+*/
     // Fetch para obtener los productos del JSON
     fetch(jsonProductos)
         .then(response => response.json())
@@ -144,5 +144,5 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         });
-});
+
 
