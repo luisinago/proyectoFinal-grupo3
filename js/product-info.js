@@ -84,7 +84,7 @@ let fetchImagenesSecundarias = async (productoID) => {
 fetchProductosInfo();
 
   
-const JsonComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoID}.json`;
+const JsonComentarios = `https://japceibal.github.io/emercado-api/products_comments/${productoID}.json`; 
 let fetchOpiniones = async (productoID) => {
       let response =  await fetch(JsonComentarios);
       let comentarioData = await response.json();
@@ -119,7 +119,6 @@ stars.forEach((star, index) => {
     });
 });
 
-//Caja comentario
 
     
 

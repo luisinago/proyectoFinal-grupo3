@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let usuarioAc = localStorage.getItem('username');
   let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
   // Actualiza el contador en el badge del carrito
-  document.getElementById('cartCount').innerText = carrito.length;
+  document.getElementById('cartCount').innerText = carrito.reduce((total, prod) => total + (prod.cantidad || 1), 0);
 
   let containerCarro = document.getElementById('containerCarro');
 
@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
                           <p>Moneda: ${prod.moneda}</p>
                           <div class="d-flex align-items-center">
                               <label for="cantidad-${index}" style="margin-right: 5px;">Cantidad:</label>
-                              <input id="cantidad-${index}" type="text" value="1" style="background-color: lightgray; width: 30px;">
+                              <input id="cantidad-${index}" type="number" value="${prod.cantidad}" style="background-color: lightgray; width: 50px;">
                           </div>
-                          <p><strong id="subtotal-${index}">Subtotal: $${prod.costo}</strong></p>
+                          <p><strong id="subtotal-${index}">Subtotal: ${(prod.costo * (prod.cantidad))}</strong></p>
                       </div>
                   </div>
       
@@ -40,11 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
               let cantidad = parseInt(e.target.value) || 1;
               let subtotal = prod.costo * cantidad;
               document.getElementById(`subtotal-${index}`).innerText = `Subtotal: $${subtotal}`;
+              prod.cantidad = cantidad; //actualiza cantidad en el carro
+              localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito)); // guarda cantidad nueva en localstorage
+              //actualiza el badge
+              document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0); 
+
             });   
-            
+             /* document.getElementById(`cantidad-${index}`).addEventListener('input', (e) => {
+                let cantidad = parseInt(e.target.value) || 1;
+                let subtotal = prod.costo * cantidad;
+                document.getElementById(`subtotal-${index}`).innerText = `Subtotal: $${subtotal.toFixed(2)}`;
+                // Actualiza la cantidad en el carrito
+                prod.cantidad = cantidad;
+                localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito));
+                // Actualiza el contador del carrito
+                document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
+                <input id="cantidad-${index}" type="number" value="${prod.cantidad || 1}" min="1" style="background-color: lightgray; width: 50px;"> */
             
       });
 
 
   }
 });
+
