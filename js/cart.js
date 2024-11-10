@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let usuarioAc = localStorage.getItem('username');
-  let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
+  var usuarioAc = localStorage.getItem('username');
+  var carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
+  var containerCarro = document.getElementById('containerCarro');
+  var totalCarrito = document.getElementById('totalCarrito');
+
   // Actualiza el contador en el badge del carrito
   document.getElementById('cartCount').innerText = carrito.reduce((total, prod) => total + (prod.cantidad || 1), 0);
 
-  let containerCarro = document.getElementById('containerCarro');
 
   if (carrito.length === 0) {
       containerCarro.innerHTML = '<div class="alert alert-dark" role="alert">No hay productos en el carrito!</div>';
@@ -34,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         })
 
+        // Calcula el total del carrito inicial
+        costoTotalCarrito();
+
           // Actualizar subtotal en tiempo real
           carrito.forEach((prod, index) => {
           document.getElementById(`cantidad-${index}`).addEventListener('input', (e) => {
@@ -45,9 +50,21 @@ document.addEventListener('DOMContentLoaded', () => {
               //actualiza el badge
               document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0); 
 
+              // Suma los subtotales del carrito para mostrar el total general actualizado
+              document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
+              costoTotalCarrito();
             });   
             
       });
+
+      // Costo total carrito
+      function costoTotalCarrito() {
+        let total = carrito.reduce((valorTotal, prod) => valorTotal += (prod.costo * (prod.cantidad || 1)), 0);
+        totalCarrito.innerText = `TOTAL: $${total}`;
+        }
+
+        // Calcula el total del carrito final actualizado
+        costoTotalCarrito();
 
 
   }
