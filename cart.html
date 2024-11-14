@@ -43,11 +43,114 @@
         </div>
     </nav>
     <main>
-        <div class="container" id="containerCarro">
+
+<div class="row">
+
+        
+        <div class="container col-lg-6"  id="containerCarro">
             <h2>Mi Carrito</h2>
         </div>
 
         <h4 id="totalCarrito"></h4> <!-- Costo total del carrito -->
+
+    <div class="container col-lg-12">
+
+      <!--RECUADRO DE ENVIO-->
+        <table>
+            <tr>
+                <div class="titulo">
+                    <th>Tipo de envío</th>
+                </div>
+              
+              </tr>
+            <tr>
+              <td><div class="opcion">
+                <input type="radio" name="shipping" checked>
+                <span class="option-title"><strong>Premium</strong></span> 
+                <span class="option-details">(de 2 a 5 días, 15%)</span>
+              </div>
+              <div class="opcion"><br>
+                <input type="radio" name="shipping" checked>
+                <span class="option-title"><strong>Express</strong></span> 
+                <span class="option-details">(de 5 a 8 días, 7%)</span> 
+              </div>
+              <div class="opcion"><br>
+                <input type="radio" name="shipping" checked>
+            <span class="option-title"><strong>Standard</strong></span> 
+            <span class="option-details">(de 12 a 17 días, 5%)</span><br><br>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                Comprar
+              </button>
+              </div></td>
+              </tr>
+            
+        </table>
+    </div>
+</div>
+
+<!--MODAL-->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-4">
+        <div class="modal-header">
+          <h4 class="modal-title" id="checkoutModalLabel">Completa los datos</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formModal">
+            <h5>Dirección del envío</h5>
+            <div class="mb-3 row align-items-center">
+              <label for="departamento" class="col-sm-4 col-form-label">Departamento</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="departamento">
+              </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+              <label for="localidad" class="col-sm-4 col-form-label">Localidad</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="localidad">
+              </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+              <label for="calle" class="col-sm-4 col-form-label">Calle</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="calle">
+              </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+              <label for="numero" class="col-sm-4 col-form-label">Número</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="numero">
+              </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+              <label for="esquina" class="col-sm-4 col-form-label">Esquina</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="esquina">
+              </div>
+            </div>
+            <h5>Forma de pago</h5>
+            <div class="form-check-inline"> <input class="form-check-input" type="radio" name="ejemploRadio" id="ejemploRadio1" value="opcion1" checked> <label class="form-check-label" for="ejemploRadio1"> Tarjeta de crédito/débito </label> </div> 
+            <div class="form-check-inline"> <input class="form-check-input" type="radio" name="ejemploRadio" id="ejemploRadio1" value="opcion2" checked> <label class="form-check-label" for="ejemploRadio2"> Transferencia bancaria </label> </div>
+
+            <h5 class="mt-3">Costos</h5>
+            <div class="sumas">
+                <p class="subtotal"><strong>Subtotal:</strong> 36000$</p>
+                <p class="costoenvio"><strong>Costo de envío:</strong> 5400$</p>
+                <p class="total"><strong>TOTAL: 41400$</strong></p>
+            </div>
+            
+
+            <div style="text-align: right;">
+                <button type="button" class="btn btn-success btn-sm">Finalizar Compra</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
         
     </main>
     <footer class="text-muted">
@@ -66,6 +169,8 @@
             <div></div>
         </div>
     </div>
+
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>

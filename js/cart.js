@@ -67,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
         costoTotalCarrito();
 
 
-  }
+    }
+
+    const AbrirModal = document.querySelector("#abrir-modal");
+    const btnCerrar = document.querySelector("#btn-cerrar");
+    const modal = document.querySelector("#modal");
 });
 
