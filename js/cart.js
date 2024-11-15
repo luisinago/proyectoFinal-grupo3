@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById(`subtotal-${index}`).innerText = `Subtotal: $${subtotal}`;
               prod.cantidad = cantidad; //actualiza cantidad en el carro
               localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito)); // guarda cantidad nueva en localstorage
-              //actualiza el badge
-              document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0); 
+            // Actualizar el badge, total general y precios en el modal
+            document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
+            costoTotalCarrito();
+            actualizarPrecio(); // Actualiza costo de envío y total
 
               // Suma los subtotales del carrito para mostrar el total general actualizado
               document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
@@ -61,16 +63,55 @@ document.addEventListener('DOMContentLoaded', () => {
       function costoTotalCarrito() {
         let total = carrito.reduce((valorTotal, prod) => valorTotal += (prod.costo * (prod.cantidad || 1)), 0);
         totalCarrito.innerText = `TOTAL: $${total}`;
+        return total;
         }
 
         // Calcula el total del carrito final actualizado
         costoTotalCarrito();
 
 
+    
+    const costoenvio = document.getElementById("costoenvio");
+    const subtotalModal = document.getElementById("subtotalModal");
+    
+    //Función para tipo de envío
+    function actualizarPrecio() {
+        let opcionesEnvio = document.getElementsByName("shipping"); // Obtener todos los botones de opción de envío
+        let porcentajeCostoEnvio = 0;
+        let total = costoTotalCarrito();
+
+            for (const opcion of opcionesEnvio) { // Encontrar el botón seleccionado y obtener su valor
+                if (opcion.checked) {
+                    porcentajeCostoEnvio = total * parseFloat(opcion.value);
+                }
+            }
+
+            porcentajeCostoEnvio = Math.round(porcentajeCostoEnvio);
+            costoenvio.innerText = `Costo de envío: $${porcentajeCostoEnvio}`;
+
+            document.getElementsByName("shipping").forEach(opcion => {
+                opcion.addEventListener("change", actualizarPrecio);
+            });
+
+        // Calcular el total (subtotal + costo de envío) y mostrarlo
+        let totalFinal = total + porcentajeCostoEnvio;
+        document.querySelector(".total").innerHTML = `<strong>TOTAL: $${totalFinal}</strong>`;
     }
+
+    actualizarPrecio();
+
+
+    // Subtotal en Modal
+    function actualizarSubtotalModal() {
+        let subtotal = costoTotalCarrito(); // Obtén el subtotal
+        subtotalModal.innerText = `Subtotal: $${subtotal}`;
+        actualizarPrecio(); // Asegura sincronización del total
+    }
+
+    actualizarSubtotalModal();
 
     const AbrirModal = document.querySelector("#abrir-modal");
     const btnCerrar = document.querySelector("#btn-cerrar");
     const modal = document.querySelector("#modal");
-});
+}});
 

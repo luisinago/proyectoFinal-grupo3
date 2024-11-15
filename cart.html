@@ -65,17 +65,17 @@
               </tr>
             <tr>
               <td><div class="opcion">
-                <input type="radio" name="shipping" checked>
+                <input type="radio" name="shipping" value="0.15" onclick="actualizarPrecio()"checked>
                 <span class="option-title"><strong>Premium</strong></span> 
                 <span class="option-details">(de 2 a 5 días, 15%)</span>
               </div>
               <div class="opcion"><br>
-                <input type="radio" name="shipping" checked>
+                <input type="radio" name="shipping" value="0.07" onclick="actualizarPrecio()">
                 <span class="option-title"><strong>Express</strong></span> 
                 <span class="option-details">(de 5 a 8 días, 7%)</span> 
               </div>
               <div class="opcion"><br>
-                <input type="radio" name="shipping" checked>
+                <input type="radio" name="shipping" value="0.05" onclick="actualizarPrecio()">
             <span class="option-title"><strong>Standard</strong></span> 
             <span class="option-details">(de 12 a 17 días, 5%)</span><br><br>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutModal">
@@ -135,9 +135,9 @@
 
             <h5 class="mt-3">Costos</h5>
             <div class="sumas">
-                <p class="subtotal"><strong>Subtotal:</strong> 36000$</p>
-                <p class="costoenvio"><strong>Costo de envío:</strong> 5400$</p>
-                <p class="total"><strong>TOTAL: 41400$</strong></p>
+                <p class="subtotal" id="subtotalModal"></p>
+                <p class="costoenvio" id="costoenvio"></p>
+                <p class="total"></p>
             </div>
             
 
