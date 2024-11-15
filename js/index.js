@@ -12,10 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
       window.location = "products.html";
   });
   
-  // Actualizar el contador del carrito
-  let usuarioAc = localStorage.getItem('username');
-  let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
-  document.getElementById('cartCount').innerText = carrito.reduce((total, prod) => total + prod.cantidad, 0);
+
 });
 
 if (localStorage.getItem("usuario") && localStorage.getItem("contraseña")) {

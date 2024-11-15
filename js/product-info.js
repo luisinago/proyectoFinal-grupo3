@@ -225,12 +225,13 @@ function agregarAlCarrito (){
     fetch(`https://japceibal.github.io/emercado-api/products/${producto}.json`) //trae la info del producto
     .then(response => response.json())
     .then(data => {
-        let {name, cost, currency, images} = data; //desestructuro
+        let {id, name, cost, currency, images} = data; //desestructuro
         if(currency == "USD"){
             cost= cost * 40;
             currency= "UYU"
         }//si la moneda es en dolares, la convierto a pesos
         let prodCarrito = {
+            id: id,
             nombre: name,
             costo: cost,
             cantidad: 1,

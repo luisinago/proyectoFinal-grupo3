@@ -566,7 +566,7 @@ table {
    border-collapse: collapse; /* matiene junto el cuadro */
   width: 25%; /* Ancho del cuadro */
   float:right; /* mueve el cuadro a la derecha*/
-  margin-top: -315px; /*Mueve el recuadro de envio hacia arriba*/
+ /*Mueve el recuadro de envio hacia arriba*/
   margin-right: 15px;
 }
 
