@@ -41,6 +41,7 @@ function mostrarCarro(){
 
         actualizaSubtotal();
         costoTotalCarrito();
+        actualizarPrecio(); // Actualiza costo de envío y total
         borrandoProducto();
 
     }
@@ -70,7 +71,45 @@ function mostrarCarro(){
       function costoTotalCarrito() {
         let total = carrito.reduce((valorTotal, prod) => valorTotal += (prod.costo * (prod.cantidad || 1)), 0);
         totalCarrito.innerText = `TOTAL: $${total}`;
+        return total;
         }
+
+
+    const costoenvio = document.getElementById("costoenvio");
+    const subtotalModal = document.getElementById("subtotalModal");
+    
+    //Función para tipo de envío
+    function actualizarPrecio() {
+        const opcionesEnvio = document.getElementsByName("shipping");
+        let porcentajeCostoEnvio = 0;
+        const total = costoTotalCarrito();
+
+        opcionesEnvio.forEach(opcion => {
+            if (opcion.checked) {
+                porcentajeCostoEnvio = total * parseFloat(opcion.value);
+            }
+        });
+
+        porcentajeCostoEnvio = Math.round(porcentajeCostoEnvio);
+        costoenvio.innerText = `Costo de envío: $${porcentajeCostoEnvio}`;
+        const totalFinal = total + porcentajeCostoEnvio;
+        document.querySelector(".total").innerHTML = `<strong>TOTAL: $${totalFinal}</strong>`;
+    }
+
+    document.getElementsByName("shipping").forEach(opcion => {
+        opcion.addEventListener("change", actualizarPrecio);
+    });
+
+    actualizarPrecio();
+
+
+     // Subtotal en Modal
+    function actualizarSubtotalModal() {
+        let subtotal = costoTotalCarrito(); // Obtén el subtotal
+        subtotalModal.innerText = `Subtotal: $${subtotal}`;
+        actualizarPrecio(); // Asegura sincronización del total
+    }
+    actualizarSubtotalModal();
 
 //funcion para eliminar un producto
         function borrandoProducto() {
