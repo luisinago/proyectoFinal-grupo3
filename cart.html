@@ -16,6 +16,8 @@
 </head>
 
 <body>
+
+  
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -44,6 +46,9 @@
         </div>
     </nav>
     <main>
+
+      
+
       <h2 style="text-align: center; margin-top: 20px;">Mi Carrito</h2>
      <div class="container"  id="containerCarro">
       
@@ -62,42 +67,54 @@
             <div class="offcanvas-body">
 
                     <!--RECUADRO DE ENVIO-->
-                      <table>
-                          <tr>
-                              <div class="titulo">
-                                  <th>Tipo de envío</th>
-                              </div>
-                            
-                            </tr>
-                          <tr>
-                            <td><div class="opcion">
-                              <input type="radio" name="shipping" value="0.15" onclick="actualizarPrecio()" checked>
-                              <span class="option-title"><strong>Premium</strong></span> 
-                              <span class="option-details">(de 2 a 5 días, 15%)</span>
-                            </div>
-                            <div class="opcion"><br>
-                              <input type="radio" name="shipping" value="0.07" onclick="actualizarPrecio()">
-                              <span class="option-title"><strong>Express</strong></span> 
-                              <span class="option-details">(de 5 a 8 días, 7%)</span> 
-                            </div>
-                            <div class="opcion"><br>
-                              <input type="radio" name="shipping" value="0.05" onclick="actualizarPrecio()">
-                          <span class="option-title"><strong>Standard</strong></span> 
-                          <span class="option-details">(de 12 a 17 días, 5%)</span><br><br>
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutModal">
-                              Comprar
-                            </button>
-                            </div></td>
-                            </tr>
-                          
-                      </table>
-                  </div>
-              
-              
-            </div>
+                    
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>class="titulo">Tipo de envío</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td> 
+                            <label class="opcion">
+                            <input type="radio" name="shipping" value="0.15" onclick="actualizarPrecio()" checked>
+                            <span class="option-title"><strong>Premium</strong></span> 
+                            <span class="option-details">(de 2 a 5 días, 15%)</span>
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          <label class="opcion"><br>
+                            <input type="radio" name="shipping" value="0.07" onclick="actualizarPrecio()">
+                            <span class="option-title"><strong>Express</strong></span> 
+                            <span class="option-details">(de 5 a 8 días, 7%)</span> 
+                          </label>
+                        </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          <label class="opcion"><br>
+                            <input type="radio" name="shipping" value="0.05" onclick="actualizarPrecio()">
+                        <span class="option-title"><strong>Standard</strong></span> 
+                        <span class="option-details">(de 12 a 17 días, 5%)</span><br><br>
+                      </label>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                            Comprar
+                          </button>
+                        </td>
+                        </tr>
+                        </tbody>
+          </table>
         
    
 <!--MODAL-->
+<div id="mensaje" class="mensaje oculto"></div>      
 <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content p-4">
@@ -160,7 +177,8 @@
     </div>
   </div>
 
-        
+  
+
     </main>
     <footer class="text-muted">
         <div class="container">
