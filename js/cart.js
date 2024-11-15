@@ -139,48 +139,86 @@ function mostrarCarro(){
 
 // Validación de inputs en "Completa los datos"
 
-const finalizarCompraBtn = document.querySelector(".btn-success");
+
 let carrito = [];
 
+
+const finalizarCompraBtn = document.querySelector(".btn-success");
+
+
+const alertContainer = document.createElement("div");
+alertContainer.classList.add("alert-container", "mt-3");
+document.querySelector("#checkoutModal .modal-body").prepend(alertContainer);
+
 finalizarCompraBtn.addEventListener("click", () => {
+    alertContainer.innerHTML = "";
     const errores = [];
+
+
+    //validaciones individuales 
 
     const camposDireccion = ["departamento", "localidad", "calle", "numero", "esquina"];
     camposDireccion.forEach((campo) => {
-      const input = document.getElementById(campo);
-      if (!input.value.trim()) {
-        errores.push(`El campo "${campo}" está vacío`);
-      }
+        const input = document.getElementById(campo);
+        if (!input.value.trim()) {
+            errores.push(`El campo: ${campo}`);
+        }
     });
+
 
     const envioSeleccionado = document.querySelector("input[name='shipping']:checked");
     if (!envioSeleccionado) {
-      errores.push("Debes seleccionar una forma de envío");
+        errores.push("Es necesario seleccionar una forma de envío.");
     }
+
 
     const cantidadesValidas = carrito.every((prod, index) => {
         const inputCantidad = document.getElementById(`cantidad-${index}`);
         return inputCantidad && parseInt(inputCantidad.value) > 0;
-      });
-  
-      if (!cantidadesValidas) {
-        errores.push("La cantidad de cada producto debe ser mayor a 0");
-      }
-
-      const formaPagoSeleccionada = document.querySelector("input[name='ejemploRadio']:checked");
-    if (!formaPagoSeleccionada) {
-      errores.push("Debes seleccionar una forma de pago");
+    });
+    if (!cantidadesValidas) {
+        errores.push("La cantidad de cada producto debe ser mayor a 0.");
     }
 
-     
-     if (formaPagoSeleccionada && formaPagoSeleccionada.value === "opcion1") {   
-      } else if (formaPagoSeleccionada && formaPagoSeleccionada.value === "opcion2") {
-      }
 
-      if (errores.length > 0) {
-        alert(`Errores encontrados:\n\n${errores.join("\n")}`);
-      } else {
-        alert("¡Compra exitosa! Gracias por tu compra.");
-      }
-    });
-  
+    const formaPagoSeleccionada = document.querySelector("input[name='ejemploRadio']:checked");
+    if (!formaPagoSeleccionada) {
+        errores.push("Es necesario seleccionar una forma de pago.");
+    }
+
+    // mostrar el mensaje de error
+    if (errores.length > 0) {
+        const alertError = document.createElement("div");
+        alertError.classList.add("alert", "alert-danger", "alert-dismissible", "fade", "show");
+        alertError.innerHTML = `
+      <strong>Es necesario completar:</strong>
+      <ul>
+        ${errores.map((error) => `<li>${error}</li>`).join("")}
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    `;
+        alertContainer.appendChild(alertError);
+
+        // elimina alertas de error automáticamente después de 5 segundos
+        setTimeout(() => {
+            alertContainer.innerHTML = "";
+        }, 5000);
+    } else {
+
+        const alertSuccess = document.createElement("div");
+        alertSuccess.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
+        alertSuccess.innerHTML = `
+      ¡Compra exitosa! .
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    `;
+        alertContainer.appendChild(alertSuccess);
+
+        // el modal con mensaje de éxito se cierra automáticamente después de 3 segundos
+        setTimeout(() => {
+            alertContainer.innerHTML = "";
+            const modal = bootstrap.Modal.getInstance(document.getElementById("checkoutModal"));
+            modal.hide();
+        }, 3000);
+    }
+});
+
