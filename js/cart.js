@@ -137,6 +137,50 @@ function mostrarCarro(){
 });
   
 
+// Validación de inputs en "Completa los datos"
+
+const finalizarCompraBtn = document.querySelector(".btn-success");
+let carrito = [];
+
+finalizarCompraBtn.addEventListener("click", () => {
+    const errores = [];
+
+    const camposDireccion = ["departamento", "localidad", "calle", "numero", "esquina"];
+    camposDireccion.forEach((campo) => {
+      const input = document.getElementById(campo);
+      if (!input.value.trim()) {
+        errores.push(`El campo "${campo}" está vacío`);
+      }
+    });
+
+    const envioSeleccionado = document.querySelector("input[name='shipping']:checked");
+    if (!envioSeleccionado) {
+      errores.push("Debes seleccionar una forma de envío");
+    }
+
+    const cantidadesValidas = carrito.every((prod, index) => {
+        const inputCantidad = document.getElementById(`cantidad-${index}`);
+        return inputCantidad && parseInt(inputCantidad.value) > 0;
+      });
   
+      if (!cantidadesValidas) {
+        errores.push("La cantidad de cada producto debe ser mayor a 0");
+      }
 
+      const formaPagoSeleccionada = document.querySelector("input[name='ejemploRadio']:checked");
+    if (!formaPagoSeleccionada) {
+      errores.push("Debes seleccionar una forma de pago");
+    }
 
+     
+     if (formaPagoSeleccionada && formaPagoSeleccionada.value === "opcion1") {   
+      } else if (formaPagoSeleccionada && formaPagoSeleccionada.value === "opcion2") {
+      }
+
+      if (errores.length > 0) {
+        alert(`Errores encontrados:\n\n${errores.join("\n")}`);
+      } else {
+        alert("¡Compra exitosa! Gracias por tu compra.");
+      }
+    });
+  
