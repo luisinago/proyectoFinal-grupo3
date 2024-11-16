@@ -54,11 +54,12 @@
       
         </div>
 
-        <h4 id="totalCarrito"></h4> <!-- Costo total del carrito -->
-
-        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvasExample">
+        <div id="containerTotalCarrito" class="text-center">
+          <h4 id="totalCarrito"></h4> <!-- Costo total del carrito -->
+          <a class="btn btn-primary mt-1" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvasExample">
             Elegir envío
-          </a>
+          </a></div> 
+
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasLabel">Tipo de envío</h5>
@@ -68,10 +69,10 @@
 
                     <!--RECUADRO DE ENVIO-->
 
-                    <table>
+                    <table id="recuadroEnvioCarrito">
                       <thead>
                         <tr>
-                          <th>class="titulo">Tipo de envío</th>
+                          <th class="title">Tipo de envío</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -86,7 +87,7 @@
                         </tr>
                         <tr>
                           <td>
-                          <label class="opcion"><br>
+                          <label class="opcion">
                             <input type="radio" name="shipping" value="0.07" onclick="actualizarPrecio()">
                             <span class="option-title"><strong>Express</strong></span> 
                             <span class="option-details">(de 5 a 8 días, 7%)</span> 
@@ -95,10 +96,10 @@
                         </tr>
                         <tr>
                           <td>
-                          <label class="opcion"><br>
+                          <label class="opcion">
                             <input type="radio" name="shipping" value="0.05" onclick="actualizarPrecio()">
                         <span class="option-title"><strong>Standard</strong></span> 
-                        <span class="option-details">(de 12 a 17 días, 5%)</span><br><br>
+                        <span class="option-details">(de 12 a 17 días, 5%)</span>
                       </label>
                       </td>
                       </tr>
