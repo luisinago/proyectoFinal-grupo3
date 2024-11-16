@@ -499,7 +499,7 @@ justify-content: center;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin: 20px;
+  margin: 3rem auto;
   align-items: center;
   justify-content: center;
   font-family: 'DM Sans', sans-serif;
@@ -559,34 +559,34 @@ justify-content: center;
 }
 
 
-/* RECUADRO DE ENVIO */
-table {
-  font-family: arial, sans-serif;
-  margin: 200px;
-   border-collapse: collapse; /* matiene junto el cuadro */
-  width: 25%; /* Ancho del cuadro */
-  float:right; /* mueve el cuadro a la derecha*/
- /*Mueve el recuadro de envio hacia arriba*/
-  margin-right: 15px;
+/* TOTAL CARRITO Y BOTÓN OPCIONES ENVÍO */
+#totalCarrito{
+  text-align: center;
 }
 
-td, th {
+/* RECUADRO DE ENVIO */
+#recuadroEnvioCarrito {
+  font-family: arial, sans-serif;
+  width: 100%; /* Ancho del cuadro */
+}
+
+#recuadroEnvioCarrito td, #recuadroEnvioCarrito th {
   border: 1px solid #020101; /*color del borde del recuadro*/
   text-align: center;
-  padding: 10px; /*Alto de los renglones */
+  padding: 1em; /*Alto de los renglones */
 }
   
 
-th {
+#recuadroEnvioCarrito th {
   color: rgb(46, 49, 49);
   font-size: 1.2rem;
 }
 
-.option-details {
+#recuadroEnvioCarrito .option-details {
   color: #666666; /* Color para ()  */
 }
 
-.option-title {
+#recuadroEnvioCarrito .option-title {
   color:rgb(68, 68, 71);
 }
 
