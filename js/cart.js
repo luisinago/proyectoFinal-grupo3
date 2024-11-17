@@ -1,21 +1,22 @@
-document.addEventListener('DOMContentLoaded', () => {
-  let usuarioAc = localStorage.getItem('username');
-  let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
-  let containerCarro = document.getElementById('containerCarro');
-  let totalCarrito = document.getElementById('totalCarrito');
-  
+let usuarioAc = localStorage.getItem('username');
+let carrito = JSON.parse(localStorage.getItem(`carritoCompras${usuarioAc}`)) || [];
+let containerCarro = document.getElementById('containerCarro');
+let totalCarrito = document.getElementById('totalCarrito');
 
-  // Actualiza el contador en el badge del carrito
+
+
+document.addEventListener('DOMContentLoaded', () => {
+ // Actualiza el contador en el badge del carrito
   document.getElementById('cartCount').innerText = carrito.reduce((total, prod) => total + (prod.cantidad || 1), 0);
 
 function mostrarCarro(){
   if (carrito.length === 0) {
-      containerCarro.innerHTML = '<div class="alert alert-dark" role="alert" style="margin-top: 40px;">No hay productos en el carrito!</div>';
+      containerCarro.innerHTML = '<div class="alert alert-danger animate__animated animate__flash animate__slow" role="alert" style="margin-top: 40px;">No hay productos en el carrito!</div>';
   } else {
     let productoHTML = '';
       carrito.forEach((prod, index) => {
           productoHTML += `
-              <div class="container card col-lg-6 md-8 sm-12" data-id="${prod.id}">
+              <div class="container card col-lg-6 md-8 sm-12 animate__animated animate__zoomIn" data-id="${prod.id}">
                   <div class="row g-0">
                       <div class="card-img">
                           <img src="${prod.imagen}" class="img-fluid" alt="${prod.nombre}">
@@ -43,10 +44,11 @@ function mostrarCarro(){
         costoTotalCarrito();
         actualizarPrecio(); // Actualiza costo de envío y total
         borrandoProducto();
+        actualizarSubtotalModal();
 
     }
 
-}
+};
 
   // Actualizar subtotal en tiempo real
   function actualizaSubtotal(){
@@ -63,6 +65,7 @@ function mostrarCarro(){
         // Suma los subtotales del carrito para mostrar el total general actualizado
         document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);
         costoTotalCarrito();
+        actualizarSubtotalModal();
       });   
     
 });
@@ -100,7 +103,7 @@ function mostrarCarro(){
         opcion.addEventListener("change", actualizarPrecio);
     });
 
-    actualizarPrecio();
+    //actualizarPrecio();
 
 
      // Subtotal en Modal
@@ -109,27 +112,31 @@ function mostrarCarro(){
         subtotalModal.innerText = `Subtotal: $${subtotal}`;
         actualizarPrecio(); // Asegura sincronización del total
     }
-    actualizarSubtotalModal();
+    //actualizarSubtotalModal();
 
-//funcion para eliminar un producto
-        function borrandoProducto() {
-            const botonesBorrar = document.querySelectorAll('.borraItem'); //trae los botones de eliminar
-            botonesBorrar.forEach((boton) => {
-                boton.addEventListener('click', (e) => {
-                    const idBorrar = boton.getAttribute('data-id'); 
-                    console.log(idBorrar);
-                    // Filtra el carrito para eliminar el producto con el id correspondiente
-                    carrito = carrito.filter(prod => prod.id != idBorrar); // filtra los productos sin el que vamos a borrar
-                    localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito)); //vuelve a guardar en ls el carro actualizado
-                    containerCarro.innerHTML=''; //limpia la pagina
-                    mostrarCarro(); // Vuelve a mostrar el carrito actualizado
-                    costoTotalCarrito();// calcula el total nuevo
-                    document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);//actualiza badge
-                });
-            });
-        }
+    //funcion para eliminar un producto
+function borrandoProducto() {
+    const botonesBorrar = document.querySelectorAll('.borraItem'); //trae los botones de eliminar
+    botonesBorrar.forEach((boton) => {
+        boton.addEventListener('click', () => {
+            const idBorrar = boton.getAttribute('data-id'); 
+            console.log(idBorrar);
+            // Filtra el carrito para eliminar el producto con el id correspondiente
+            carrito = carrito.filter(prod => prod.id != idBorrar); // filtra los productos sin el que vamos a borrar
+            localStorage.setItem(`carritoCompras${usuarioAc}`, JSON.stringify(carrito)); //vuelve a guardar en ls el carro actualizado
+            containerCarro.innerHTML=''; //limpia la pagina
+            mostrarCarro(); // Vuelve a mostrar el carrito actualizado
+            costoTotalCarrito();// calcula el total nuevo
+            actualizarPrecio();
+            actualizaSubtotal();
+            actualizarSubtotalModal();
+            document.getElementById('cartCount').innerText = carrito.reduce((total, p) => total + (p.cantidad || 1), 0);//actualiza badge
+        });
+    });
+}
 
         mostrarCarro(); 
+
         const AbrirModal = document.querySelector("#abrir-modal");
         const btnCerrar = document.querySelector("#btn-cerrar");
         const modal = document.querySelector("#modal");
@@ -140,7 +147,7 @@ function mostrarCarro(){
 // Validación de inputs en "Completa los datos"
 
 
-let carrito = [];
+//let carrito = [];
 
 
 const finalizarCompraBtn = document.querySelector(".btn-success");
@@ -208,7 +215,7 @@ finalizarCompraBtn.addEventListener("click", () => {
         const alertSuccess = document.createElement("div");
         alertSuccess.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
         alertSuccess.innerHTML = `
-      ¡Compra exitosa! .
+      ¡Compra exitosa!
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
     `;
         alertContainer.appendChild(alertSuccess);
